@@ -27,6 +27,28 @@
     .billing-section button:hover { background-color: #45a049; }
     #toast { position: fixed; bottom: 4%; left: 50%; transform: translateX(-50%); background-color: #333; color: #fff; padding: 10px; border-radius: 5px; display: none; font-size: 14px; }
     .menu-item-row span { flex: 1; text-align: left; }
+    
+  #lucky-meal-btn {
+    display: block;
+    margin: 20px auto; /* Centers the button */
+  }
+
+  @keyframes pop {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  #lucky-meal-btn:hover {
+    animation: pop 0.3s ease-in-out; /* Adds the pop effect on hover */
+  }
+
   </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
