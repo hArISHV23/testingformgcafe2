@@ -28,27 +28,6 @@
     #toast { position: fixed; bottom: 4%; left: 50%; transform: translateX(-50%); background-color: #333; color: #fff; padding: 10px; border-radius: 5px; display: none; font-size: 14px; }
     .menu-item-row span { flex: 1; text-align: left; }
     
-  #lucky-meal-btn {
-    display: block;
-    margin: 20px auto; /* Centers the button */
-  }
-
-  @keyframes pop {
-    0% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.2);
-    }
-    100% {
-      transform: scale(1);
-    }
-  }
-
-  #lucky-meal-btn:hover {
-    animation: pop 0.3s ease-in-out; /* Adds the pop effect on hover */
-  }
-
   </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -57,7 +36,10 @@
 <body>
   <h1 class="text-3xl font-bold mb-4 text-white" id="name">🍜 Blasuz Maggie Cafe</h1>
 
+<div class="flex justify-center">
   <button id="lucky-meal-btn" class="mb-4 p-2 bg-[#4caf50] text-white rounded hover:bg-[#45a049]" onclick="suggestLuckyMeal()">🎲 Try Your Lucky Meal</button>
+</div>
+
 
   <input type="text" id="search" placeholder="⌕ Find your taste." class="w-full p-2 rounded bg-[#2c2e3f] text-white mb-4"/>
   <div id="menu" class="menu-grid"></div>
