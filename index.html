@@ -1,4 +1,3 @@
-<!-- FULL CODE (copy-paste this into your file) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -203,34 +202,35 @@
   const payment = document.getElementById("payment").value;
   const phone = document.getElementById("user-phone").value.trim();
 
-  if (!phone || Object.keys(cart).length === 0) {
-    showToast("Please enter phone number and add at least one item!");
+  if (!phone || phone.length < 10) {
+    showToast("📱 Please enter a valid phone number.");
     return;
   }
 
-  let orderDetails = `📦 *New Order from Blasuz Maggie Cafe* 📦\n`;
-  orderDetails += `👤 Phone: ${phone}\n`;
-  orderDetails += `🪑 Table: ${table}\n`;
-  orderDetails += `💳 Payment: ${payment}\n\n`;
-  orderDetails += `📝 Order Summary:\n`;
-
-  let total = 0;
-  for (const item in cart) {
-    const quantity = cart[item].quantity;
-    const price = cart[item].price;
-    const itemTotal = quantity * price;
-    orderDetails += `- ${item} x${quantity} = ₹${itemTotal}\n`;
-    total += itemTotal;
+  if (Object.keys(cart).length === 0) {
+    showToast("🛒 Your cart is empty!");
+    return;
   }
 
-  orderDetails += `\n💰 Total: ₹${total}`;
+  let orderDetails = `🧾 New Order from Blasuz Maggie Cafe\n📞 Phone: ${phone}\n🍽️ Table: ${table}\n💳 Payment: ${payment}\n\n🛍️ Items:\n`;
+  let total = 0;
 
-  const waLink = generateWhatsAppLink(orderDetails);
-  window.open(waLink, '_blank');
-  showToast("Order sent via WhatsApp!");
+  for (const item in cart) {
+    const qty = cart[item].quantity;
+    const price = cart[item].price * qty;
+    orderDetails += `- ${item} x ${qty} = ₹${price}\n`;
+    total += price;
+  }
 
-  clearCart(); // Optional: clear cart after sending
+  orderDetails += `\n💰 Total: ₹${total}\n✅ Please confirm the order!`;
+
+  const link = generateWhatsAppLink(orderDetails);
+  window.open(link, "_blank");
+
+  clearCart();
+  showToast("✅ Order sent via WhatsApp!");
 }
+
 
    function submitFeedback() {
   const name = document.getElementById("fb-name").value.trim();
@@ -269,3 +269,4 @@
   </script>
 </body>
 </html>
+
