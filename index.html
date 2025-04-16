@@ -1,12 +1,12 @@
-
-<!DOCTYPE html> 
-<html lang="en"> 
-<head> 
-  <meta charset="UTF-8" /> 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
-  <title>Blasuz Maggie Cafe</title> 
-  <script src="https://cdn.tailwindcss.com"></script> 
-  <style> 
+<!-- FULL CODE (copy-paste this into your file) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blasuz Maggie Cafe</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
     footer { background-color: #1e1f2b; border-radius: 12px; }
     body { font-family: 'Lexend', sans-serif; padding: 20px; background: #181a29; color: #e4e4e7; }
     .menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin-top: 20px; }
@@ -28,68 +28,71 @@
     .billing-section button:hover { background-color: #45a049; }
     #toast { position: fixed; bottom: 4%; left: 50%; transform: translateX(-50%); background-color: #333; color: #fff; padding: 10px; border-radius: 5px; display: none; font-size: 14px; }
     .menu-item-row span { flex: 1; text-align: left; }
-  </style> 
-  <link rel="preconnect" href="https://fonts.googleapis.com"> 
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
-  <link href="https://fonts.googleapis.com/css2?family=Lexend&display=swap" rel="stylesheet"> 
-</head> 
-<body> 
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend&display=swap" rel="stylesheet">
+</head>
+<body>
+  <h1 class="text-3xl font-bold mb-4 text-white" id="name">🍜 Blasuz Maggie Cafe</h1>
 
-  <h1 class="text-3xl font-bold mb-4 text-white" id="name">🍜 Blasuz Maggie Cafe</h1> 
-  <input type="text" id="search" placeholder="⌕  Find your taste." class="w-full p-2 rounded bg-[#2c2e3f] text-white mb-4"/> 
+  <button id="lucky-meal-btn" class="mb-4 p-2 bg-[#4caf50] text-white rounded hover:bg-[#45a049]" onclick="suggestLuckyMeal()">🎲 Try Your Lucky Meal</button>
 
-  <div id="menu" class="menu-grid"></div> 
+  <input type="text" id="search" placeholder="⌕ Find your taste." class="w-full p-2 rounded bg-[#2c2e3f] text-white mb-4"/>
+  <div id="menu" class="menu-grid"></div>
 
-  <div id="cart"> 
-    <h2>Your Cart</h2> 
-    <ul id="cart-list"></ul> 
-    <p id="total">Total: ₹0</p> 
-    <button id="clear-cart" onclick="clearCart()">Clear Cart</button> 
-  </div> 
+  <div id="cart">
+    <h2>Your Cart</h2>
+    <ul id="cart-list"></ul>
+    <p id="total">Total: ₹0</p>
+    
+  </div>
 
-  <div class="billing-section"> 
-    <h2>Billing Section</h2> 
-    <label for="payment">Payment Method:</label> 
-    <select id="payment"> 
-      <option value="Cash">Cash</option> 
-      <option value="UPI">UPI</option> 
-    </select> 
+  <div class="billing-section">
+    <h2>Billing Section</h2>
+    <label for="user-phone">Your Phone Number:</label>
+    <input type="text" id="user-phone" placeholder="Enter your phone number" required />
+    <label for="payment">Payment Method:</label>
+    <select id="payment">
+      <option value="Cash">Cash</option>
+      <option value="UPI">UPI</option>
+    </select>
+    <label for="tableNumber">Select Table Number:</label>
+    <select id="tableNumber">
+      <option value="Table 1">Table 1</option>
+      <option value="Table 2">Table 2</option>
+      <option value="Table 3">Table 3</option>
+      <option value="Takeaway">Takeaway</option>
+    </select>
+    <button onclick="submitOrder()">Order Now</button>
+    <button id="clear-cart" onclick="clearCart()">Clear Cart</button>
+ 
+  </div>
 
-    <label for="tableNumber">Select Table Number:</label> 
-    <select id="tableNumber"> 
-      <option value="">Choose Table</option> 
-    </select> 
+  <div class="billing-section mt-10">
+    <h2 class="text-xl font-bold mb-2">💬 Feedback Form</h2>
+    <label for="fb-name">Your Name:</label>
+    <input type="text" id="fb-name" placeholder="Enter your name" required />
+    <label for="fb-rating">Rating:</label>
+    <select id="fb-rating" required>
+      <option value="">Select rating</option>
+      <option value="⭐">⭐</option>
+      <option value="⭐⭐">⭐⭐</option>
+      <option value="⭐⭐⭐">⭐⭐⭐</option>
+      <option value="⭐⭐⭐⭐">⭐⭐⭐⭐</option>
+      <option value="⭐⭐⭐⭐⭐">⭐⭐⭐⭐⭐</option>
+    </select>
+    <label for="fb-message">Your Feedback:</label>
+    <textarea id="fb-message" placeholder="Tell us what you think..." rows="4" class="w-full p-2 rounded bg-[#181a29] text-white"></textarea>
+    <button onclick="submitFeedback()">Send Feedback</button>
+  </div>
 
-    <button onclick="submitOrder()">Order Now</button> 
-  </div> 
+  <div id="toast"></div>
 
-  <div class="billing-section mt-10"> 
-    <h2 class="text-xl font-bold mb-2">💬 Feedback Form</h2> 
-    <label for="fb-name">Your Name:</label> 
-    <input type="text" id="fb-name" placeholder="Enter your name" required /> 
-
-    <label for="fb-rating">Rating:</label> 
-    <select id="fb-rating" required> 
-      <option value="">Select rating</option> 
-      <option value="⭐">⭐</option> 
-      <option value="⭐⭐">⭐⭐</option> 
-      <option value="⭐⭐⭐">⭐⭐⭐</option> 
-      <option value="⭐⭐⭐⭐">⭐⭐⭐⭐</option> 
-      <option value="⭐⭐⭐⭐⭐">⭐⭐⭐⭐⭐</option> 
-    </select> 
-
-    <label for="fb-message">Your Feedback:</label> 
-    <textarea id="fb-message" placeholder="Tell us what you think..." rows="4" class="w-full p-2 rounded bg-[#181a29] text-white"></textarea> 
-
-    <button onclick="submitFeedback()">Send Feedback</button> 
-  </div> 
-
-  <div id="toast"></div> 
-
-  <footer class="mt-10 text-center text-sm text-gray-400 py-4 border-t border-gray-700"> 
-    <p>🍜 <strong>Blasuz Maggie Cafe</strong> &copy; 2025. All rights reserved.</p> 
-    <p>Made with ❤️ by stuff"s | Developer Contact: <a href="https://wa.me/9360296867" class="text-green-400 hover:underline" target="_blank">WhatsApp Us</a></p> 
-  </footer> 
+  <footer class="mt-10 text-center text-sm text-gray-400 py-4 border-t border-gray-700">
+    <p>🍜 <strong>Blasuz Maggie Cafe</strong> &copy; 2025. All rights reserved.</p>
+    <p>Made with ❤️ by stuff"s | Developer Contact: <a href="https://wa.me/9360296867" class="text-green-400 hover:underline" target="_blank">WhatsApp Us</a></p>
+  </footer>
 
   <script>
     const menuData = {
@@ -119,7 +122,6 @@
         const filteredItems = menuData[category].filter(item =>
           item.name.toLowerCase().includes(query.toLowerCase())
         );
-
         if (filteredItems.length > 0) {
           menuHtml += `<div class="menu-card"><img src="${filteredItems[0].image}" alt="${category}">
           <div class="menu-title">${category}</div><div>`;
@@ -190,42 +192,51 @@
       setTimeout(() => toast.style.display = 'none', 2000);
     }
 
+    function generateWhatsAppLink(message) {
+      const encoded = encodeURIComponent(message);
+      return `https://wa.me/9360296867?text=${encoded}`;
+    }
+
     function submitOrder() {
       const table = document.getElementById("tableNumber").value;
       const payment = document.getElementById("payment").value;
-      if (!table || Object.keys(cart).length === 0) {
-        alert("Please select table and add items.");
+      const phone = document.getElementById("user-phone").value;
+      if (!table || !payment || !phone || Object.keys(cart).length === 0) {
+        showToast("Please fill all fields and add items to cart!");
         return;
       }
-      const items = Object.entries(cart).map(([name, { price, quantity }]) =>
-        `${name} x ${quantity} (₹${price * quantity})`
-      ).join(", ");
-      const total = Object.values(cart).reduce((sum, { price, quantity }) => sum + price * quantity, 0);
-      const msg = `Hello! 🍜 New Order:\nTable: ${table}\nPayment: ${payment}\nItems: ${items}\nTotal: ₹${total}`;
-      window.open(`https://wa.me/9360296867?text=${encodeURIComponent(msg)}`, "_blank");
+
+      let msg = `📦 *New Order*%0A👤 Phone: ${phone}%0A🪑 Table: ${table}%0A💳 Payment: ${payment}%0A📝 Order Details:%0A`;
+      for (let item in cart) {
+        msg += `• ${item} x ${cart[item].quantity} = ₹${cart[item].price * cart[item].quantity}%0A`;
+      }
+      const total = Object.values(cart).reduce((acc, item) => acc + item.price * item.quantity, 0);
+      msg += `%0A💰 Total: ₹${total}%0A✅ Confirmed via Cafe Website`;
+
+      const link = generateWhatsAppLink(msg);
+      window.open(link, '_blank');
     }
 
     function submitFeedback() {
-      const name = document.getElementById("fb-name").value.trim();
+      const name = document.getElementById("fb-name").value;
       const rating = document.getElementById("fb-rating").value;
-      const msg = document.getElementById("fb-message").value.trim();
-      if (!name || !rating || !msg) return alert("Please fill out all fields.");
-      const fb = `📝 New Feedback:\nName: ${name}\nRating: ${rating}\nMessage: ${msg}`;
-      window.open(`https://wa.me/9360296867?text=${encodeURIComponent(fb)}`, "_blank");
+      const msg = document.getElementById("fb-message").value;
+
+      if (!name || !rating || !msg) return showToast("Please fill all feedback fields!");
+
+      const feedback = `💬 *New Feedback*%0A👤 Name: ${name}%0A⭐ Rating: ${rating}%0A📝 Message: ${msg}`;
+      window.open(generateWhatsAppLink(feedback), '_blank');
+      showToast("Thanks for the feedback!");
     }
 
-    function initTableDropdown() {
-      const tableSelect = document.getElementById("tableNumber");
-      for (let i = 1; i <= 10; i++) {
-        const opt = document.createElement("option");
-        opt.value = i;
-        opt.textContent = `Table ${i}`;
-        tableSelect.appendChild(opt);
-      }
+    function suggestLuckyMeal() {
+      const allItems = [].concat(...Object.values(menuData));
+      const randomItem = allItems[Math.floor(Math.random() * allItems.length)];
+      addItem(randomItem.name, randomItem.price);
+      showToast(`🎉 Lucky Pick: ${randomItem.name} added to cart!`);
     }
 
     updateMenu();
-    initTableDropdown();
   </script>
 </body>
 </html>
